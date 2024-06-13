@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 public class SellingPoint {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     String title;
@@ -15,8 +15,13 @@ public class SellingPoint {
 
     public SellingPoint(){}
 
-    public SellingPoint(String title){
+    public SellingPoint(String title, String content, String imagelink,String colour, Details mn){
         super();
+        this.title = title;
+        this.content = content;
+        this.imageLink = imagelink;
+        this.colour = colour;
+        this.details = mn;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

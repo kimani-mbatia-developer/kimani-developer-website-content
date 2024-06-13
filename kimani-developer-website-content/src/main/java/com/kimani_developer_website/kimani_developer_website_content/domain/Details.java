@@ -8,28 +8,50 @@ import java.util.List;
 @Entity
 public class Details {
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long Id;
 
-    ArrayList<String> headers;
+    private String fullName;
+    private String role;
+    private String description;
+    private String skillsPageDescription;
 
-    String fullName;
-    String role;
-    String description;
-    String skillsPageDescription;
+    ArrayList<SellingPoint> sellingPoint;
+
+    String portfolioDesc;
+
+    ArrayList<PortfolioItem> portfolio;
+
+    String cvText;
+
+    ArrayList<SocialMediaLink> links;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="details", cascade=CascadeType.ALL)
+    private List<Header> headers;
+
 
     public Details(){};
 
-    public Details(ArrayList<String>headers, String fullName,String role, String description,String skillsPageDescription){
+    public Details(String fullName,String role, String description,
+                   String skillsPageDescription,String portfolioDesc
+                   ,String cv){
         super();
+        this.fullName=fullName;
+        this.role=role;
+        this.description=description;
+        this.skillsPageDescription=skillsPageDescription;
+        this.portfolioDesc=portfolioDesc;
+        this.cvText = cv;
 
     }
 
-    public ArrayList<String> getHeaders() {
-        return headers;
+
+
+    public List<Header> getHeaders() {
+        return this.headers;
     }
 
-    public void setHeaders(ArrayList<String> headers) {
+    public void setHeaders(List<Header> headers) {
         this.headers = headers;
     }
 
@@ -65,11 +87,16 @@ public class Details {
         this.skillsPageDescription = skillsPageDescription;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sellingpoint")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "details")
     List<SellingPoint> sellingPointList;
 
     public List<SellingPoint> getSellingPointList(){
         return sellingPointList;
+    }
+
+    public void setSellingPoint(ArrayList<SellingPoint> s){
+        this.sellingPoint = s;
     }
 
 
