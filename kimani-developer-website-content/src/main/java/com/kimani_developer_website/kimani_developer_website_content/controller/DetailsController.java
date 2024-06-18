@@ -3,6 +3,8 @@ package com.kimani_developer_website.kimani_developer_website_content.controller
 import com.kimani_developer_website.kimani_developer_website_content.domain.Details;
 import com.kimani_developer_website.kimani_developer_website_content.domain.DetailsRepository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,5 +19,11 @@ public class DetailsController {
     @GetMapping("/")
     public Iterable<Details> returnDetails(){
         return detailsRepo.findAll();
+    }
+
+    @PostMapping("/")
+    Details addDetails(@RequestBody Details dt){
+        detailsRepo.save(dt);
+        return dt;
     }
 }
