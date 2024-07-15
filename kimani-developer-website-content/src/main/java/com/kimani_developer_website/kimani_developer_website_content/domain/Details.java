@@ -1,6 +1,9 @@
 package com.kimani_developer_website.kimani_developer_website_content.domain;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,16 +14,17 @@ public class Details {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
-    private String fullName;
-    private String role;
-    private String description;
-    private String skillsPageDescription;
+    private @Getter @Setter String fullName;
+    private @Getter @Setter String role;
+    private @Getter @Setter String description;
+    private @Getter @Setter String skillsPageDescription;
 
-    ArrayList<SellingPoint> sellingPoint;
+    private @Getter @Setter ArrayList<SellingPoint> sellingPoint;
+    private @Getter @Setter ArrayList<Skills>skills;
 
-    String portfolioDesc;
+    private @Getter @Setter String portfolioDesc;
 
-    ArrayList<PortfolioItem> portfolio;
+    private @Getter @Setter ArrayList<PortfolioItem> portfolio;
 
     String cvText;
 
@@ -55,51 +59,9 @@ public class Details {
         this.headers = headers;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getSkillsPageDescription() {
-        return skillsPageDescription;
-    }
-
-    public void setSkillsPageDescription(String skillsPageDescription) {
-        this.skillsPageDescription = skillsPageDescription;
-    }
-
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "details")
     List<SellingPoint> sellingPointList;
-
-    public List<SellingPoint> getSellingPointList(){
-        return sellingPointList;
-    }
-
-    public void setSellingPoint(ArrayList<SellingPoint> s){
-        this.sellingPoint = s;
-    }
-
-
 
 
 
